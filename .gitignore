@@ -1,0 +1,10 @@
+map-restassured/target/allure-results/
+!map-restassured/target/allure-results/executor.json
+
+map-restassured/target/site/allure-maven-plugin/data/test-cases/
+map-restassured/target/site/allure-maven-plugin/data/attachments/
+map-restassured/pipeline/
+map-restassured/target/site/allure-maven-plugin/
+!map-restassured/target/site/allure-maven-plugin/index.html
+map-restassured/target/surefire-reports/
+/map-restassured/target/test-classes

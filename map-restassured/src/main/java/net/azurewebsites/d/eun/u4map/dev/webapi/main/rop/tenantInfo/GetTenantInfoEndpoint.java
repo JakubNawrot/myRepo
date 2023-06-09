@@ -1,0 +1,38 @@
+package net.azurewebsites.d.eun.u4map.dev.webapi.main.rop.tenantInfo;
+
+import net.azurewebsites.d.eun.u4map.dev.webapi.main.pojo.tenantInfo.TenantInfo;
+import net.azurewebsites.d.eun.u4map.dev.webapi.main.request.configuration.RequestConfigurationBuilder;
+import net.azurewebsites.d.eun.u4map.dev.webapi.main.rop.BaseEndPoint;
+import net.azurewebsites.d.eun.u4map.dev.webapi.main.test.data.FakePropertiesGenerator;
+import org.apache.http.HttpStatus;
+
+import java.lang.reflect.Type;
+
+import static io.restassured.RestAssured.given;
+
+public class GetTenantInfoEndpoint extends BaseEndPoint<GetTenantInfoEndpoint, TenantInfo> {
+    @Override
+    protected Type getModelType() {
+        return TenantInfo.class;
+    }
+
+    @Override
+    public GetTenantInfoEndpoint sendRequest() {
+        response = given().spec(RequestConfigurationBuilder.getDefaultRequestSpecification())
+                .pathParam("tenantId", tenantId)
+                .when().get("tenantInfo/{tenantId}");
+        return this;
+    }
+
+    public GetTenantInfoEndpoint sendInvalidRequest() {
+        response = given().spec(RequestConfigurationBuilder.getDefaultRequestSpecification())
+                .pathParam("tenantId", new FakePropertiesGenerator().generateFakeUuid())
+                .when().get("tenantInfo/{tenantId}");
+        return this;
+    }
+
+    @Override
+    protected int getSuccessStatusCode() {
+        return HttpStatus.SC_OK;
+    }
+}
